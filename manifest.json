@@ -1,0 +1,16 @@
+{
+  "name": "Internal Transfer - Hygiene Service",
+  "short_name": "Internal Transfer",
+  "start_url": "Internal_Transfer_Hygiene_Service.html",
+  "display": "standalone",
+  "background_color": "#e4f2fc",
+  "theme_color": "#0d5a96",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
