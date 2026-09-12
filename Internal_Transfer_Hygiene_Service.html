@@ -272,8 +272,8 @@ function stockHtml(code, warehouse){
   if(matches.length===1){
     return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8: "+matches[0].qty+" "+matches[0].unit+"</div>";
   }
-  var lines=matches.map(function(x){return norm(x.warehouse)+": "+x.qty+" "+x.unit;});
-  return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8: "+lines.join(", ")+"</div>";
+  var lines=matches.map(function(x,i){return (i+1)+") "+norm(x.warehouse)+": "+x.qty+" "+x.unit;});
+return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;line-height:1.6;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8:<br>"+lines.join("<br>")+"</div>";
 }
 
 function initLocSearch(inputId, resId, dataArr){
