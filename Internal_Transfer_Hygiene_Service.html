@@ -252,9 +252,15 @@ function fb(txt,cb){
 function loadNashtebi(){
   if(NASHTEBI||NASHTEBI_LOADING) return;
   NASHTEBI_LOADING=true;
-  fetch(NASHTEBI_URL).then(function(r){return r.json();}).then(function(data){
-    NASHTEBI=data;NASHTEBI_LOADING=false;
-  }).catch(function(){NASHTEBI_LOADING=false;});
+  window.__nashtebiCallback=function(data){
+    NASHTEBI=data;
+    NASHTEBI_LOADING=false;
+    if(typeof refreshAllStock==="function") refreshAllStock();
+  };
+  var s=document.createElement("script");
+  s.src=NASHTEBI_URL+"?callback=__nashtebiCallback";
+  s.onerror=function(){NASHTEBI_LOADING=false;};
+  document.head.appendChild(s);
 }
 
 function stockHtml(code, warehouse){
