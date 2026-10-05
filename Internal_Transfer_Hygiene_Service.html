@@ -297,17 +297,14 @@ function stockHtml(code, warehouse){
   if(!NASHTEBI) return "";
   function norm(s){ return s ? s.replace(/\s+/g," ").trim() : ""; }
   var nCode=norm(code);
-  var nWh=norm(warehouse);
   var matches=NASHTEBI.filter(function(x){return norm(x.code)===nCode;});
-  if(!matches.length) return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8 \u10dc\u10d0\u10e8\u10d7\u10d8: 0</div>";
-  if(nWh){
-    var here=matches.find(function(x){return norm(x.warehouse)===nWh;});
-    if(here) return "<div class=\"stock-info\" style=\"font-size:12px;color:#2a7a3a;margin-top:4px;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8: "+here.qty+" "+here.unit+"</div>";
-    return "<div class=\"stock-info\" style=\"font-size:12px;color:#a05a00;margin-top:4px;\">\u10db\u10d8\u10d7\u10d8\u10d7\u10d4\u10d1\u10e3\u10da \u10e1\u10d0\u10ec\u10e7\u10dd\u10d1\u10e8\u10d8 \u10dc\u10d0\u10e8\u10d7\u10d8 \u10d0\u10e0 \u10d0\u10e0\u10d8\u10e1: 0</div>";
-  }
+  if(!matches.length) return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">ხელმისაწვდომი ნაშთი: 0</div>";
   if(matches.length===1){
-    return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8: "+matches[0].qty+" "+matches[0].unit+"</div>";
+    return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">ხელმისაწვდომი: "+matches[0].qty+" "+matches[0].unit+" ("+norm(matches[0].warehouse)+")</div>";
   }
+  var lines=matches.map(function(x,i){return (i+1)+") "+norm(x.warehouse)+": "+x.qty+" "+x.unit;});
+  return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;line-height:1.6;\">ხელმისაწვდომი:<br>"+lines.join("<br>")+"</div>";
+}
   var lines=matches.map(function(x,i){return (i+1)+") "+norm(x.warehouse)+": "+x.qty+" "+x.unit;});
 return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;line-height:1.6;\">\u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8:<br>"+lines.join("<br>")+"</div>";
 }
