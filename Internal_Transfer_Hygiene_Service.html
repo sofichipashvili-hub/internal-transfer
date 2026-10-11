@@ -332,7 +332,7 @@ function stockHtml(code, warehouse){
   function norm(s){ return s ? s.replace(/\s+/g," ").trim() : ""; }
   var nCode=norm(code);
   var nWh=norm(warehouse);
-  var matches=NASHTEBI.filter(function(x){return norm(x.code)===nCode;});
+  var matches=NASHTEBI.filter(function(x){return norm(x.code)===nCode && Number(String(x.qty).replace(",","."))>0;});
   if(!matches.length) return "<div class=\"stock-info\" style=\"font-size:12px;color:#888;margin-top:4px;\">ხელმისაწვდომი ნაშთი: 0</div>"+STALE;
   var lines=matches.map(function(x,i){return (i+1)+") "+norm(x.warehouse)+": "+x.qty+" "+x.unit;});
   var listHtml="ხელმისაწვდომი ნაშთი:<br>"+lines.join("<br>");
